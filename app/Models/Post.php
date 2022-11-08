@@ -5,53 +5,56 @@ namespace App\Models;
 use Illuminate\Support\Facades\File;
 use Spatie\YamlFrontMatter\YamlFrontMatter;
 
+
 class Post
 {
-	public $title;
-	public $body;
-	public $date;
-	public $lead;
-	public $slug;
+    public $title;
+    public $body;
+    public $date;
+    public $lead;
+    public $slug;
 
-	public function __construct($title, $body, $date, $lead, $slug)
-	{
-		$this->title = $title;
-		$this->body = $body;
-		$this->date = $date;
-		$this->lead = $lead;
-		$this->slug = $slug;
-	}
+    function __construct($title, $body, $date, $lead, $slug)
+    {
+        $this->title = $title;
+        $this->body = $body;
+        $this->date = $date;
+        $this->lead = $lead;
+        $this->slug = $slug;
+    }
 
-	static function all()
-	{
-		$files = File::files(resource_path("posts/"));
+    static function all()
+    {
+        $files = File::files(resource_path('/posts'));
 
-		$posts = [];
+        $posts = [];
 
-		foreach ($files as $file) {
-			$object = YamlFrontMatter::parse($file->getContents());
-			$post = new Post(
-				$object->title,
-				$object->body(),
-				$object->date,
-				$object->lead,
-				$object->slug
-			);
-			$posts[] = $post;
-		}
-		return $posts;
-	}
+        foreach ($files as $file) {
+            //$posts[] = $file->getContents();
+            $object = YamlFrontMatter::parse($file->getContents());
+            $post = new Post(   $object->title,
+                                $object->body(),
+                                $object->date,
+                                $object->lead,
+                                $object->slug);
+            $posts[] = $post;
+        }
 
-	static function find($slug)
-	{
-		$post = static::all();
+        $postCollections = collect($posts)->sortBy('date');
 
-		foreach ($post as $p) {
-			if ($p->slug == $slug) {
-				return $p;
-			}
-		}
+        return $posts;
+    }
 
-		return abort(404, 'Sorry, that post was not found.');
-	}
+    static function find($slug)
+    {
+        $posts = static::all();
+
+        foreach ($posts as $post) {
+            if ($post->slug == $slug) {
+                return $post;
+            }
+        }
+
+        return null;
+    }
 }

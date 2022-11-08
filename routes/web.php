@@ -15,14 +15,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    // return ['egy','kettő','három'];
+    // return 'Hello World';
+
     return view('welcome');
 });
 
-Route::get('/help', function () {
-    return view('help');
+Route::get('/help', function() {
+    return view("help");
 });
 
-Route::get('/posts/', function() {
+Route::get('/posts', function() {
 
     $posts = Post::all();
 
@@ -31,11 +34,9 @@ Route::get('/posts/', function() {
     ]);
 });
 
-Route::get('/posts/{post}', function ($post) {
+Route::get('/posts/{post}', function($post) {
 
     $post = Post::find($post);
 
-    return view('post', [
-        'post' => $post
-    ]);
+    return view('post', ['post' => $post]);
 });
