@@ -40,3 +40,7 @@ Route::get('/posts/{post}', function($post) {
 
     return view('post', ['post' => $post]);
 });
+
+Route::get('/info', function() {
+    phpinfo();
+});
