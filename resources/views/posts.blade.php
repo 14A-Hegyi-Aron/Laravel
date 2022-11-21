@@ -1,9 +1,13 @@
 <x-layout>
+
     @foreach ($posts as $post)
-        <article class="{{ $loop->even ? 'even' : 'odd' }}">
-            <h1><a style="text-decoration: none" href="/posts/{{ $post->slug }}">{{ $post->title }}</a></h1>
+        {{-- @dd($loop) --}}
+        <article class="{{ $loop->even ? 'paros' : 'ptln' }}">
+            <h1>
+                <a href='posts/{{ $post->id }}'>{{ $post->title }}</a>
+            </h1>
             <p>{{ $post->lead }}</p>
         </article>
     @endforeach
-</x-layout>
 
+</x-layout>

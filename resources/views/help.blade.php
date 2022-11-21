@@ -1,5 +1,7 @@
 <x-layout>
+
     <h1>
-        Ez itt a súgó, ami még nem kész, de már most is hasznos lehet, ha szereted a meséket.
+        Ez itt a súgó, még nincs benne semmi.
     </h1>
+
 </x-layout>

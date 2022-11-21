@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 
@@ -14,18 +15,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    // return ['egy','kettő','három'];
-    // return 'Hello World';
+// Route::get('/', function () {
+//     // return ['egy','kettő','három'];
+//     // return 'Hello World';
 
-    return view('welcome');
-});
+//     return view('welcome');
+// });
 
-Route::get('/help', function() {
-    return view("help");
-});
+// Route::get('/help', function() {
+//     return view("help");
+// });
 
-Route::get('/posts', function() {
+Route::get('/', function() {
 
     $posts = Post::all();
 
@@ -34,13 +35,21 @@ Route::get('/posts', function() {
     ]);
 });
 
-Route::get('/posts/{post}', function($post) {
 
-    $post = Post::find($post);
+Route::get('/posts/{post:slug}', function(Post $post) {
+
+    // $post = Post::find($post);
 
     return view('post', ['post' => $post]);
 });
 
 Route::get('/info', function() {
-    phpinfo();
+    return phpinfo();
+});
+
+Route::get('/categories/{category:slug}', function(Category $category) {
+
+    return view('posts', [
+        'posts' => $category->posts
+    ]);
 });
