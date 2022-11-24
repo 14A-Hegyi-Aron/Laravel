@@ -8,9 +8,13 @@
             <a href="/categories/{{ $post->category->slug }}">
                 {{ $post->category->name }}</a>
         </p>
+        <p>
+            Szerző:
+            <a href="#">
+                {{ $post->user->name }}</a>
+        </p>
 
         {!! $post->body !!}
     </article>
 
 </x-layout>
-
