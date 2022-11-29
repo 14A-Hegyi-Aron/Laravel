@@ -10,8 +10,8 @@
         </p>
         <p>
             Szerző:
-            <a href="#">
-                {{ $post->user->name }}</a>
+            <a href="/authors/{{ $post->author->id }}">
+                {{ $post->author->name }}</a>
         </p>
 
         {!! $post->body !!}
