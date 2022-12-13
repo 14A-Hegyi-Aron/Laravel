@@ -61,9 +61,3 @@ Route::get('/authors/{user}', function(User $user) {
         'posts' => $user->posts
     ]);
 });
-
-// best ascii art of a tv:
-//
-
-
-
